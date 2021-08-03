@@ -88,6 +88,10 @@ public class Main implements MyREPL {
 	}
 
 	private static void abortTransaction() {
+    	if (currentNestedTransactionIndex == 0) {
+    		System.out.println("ERROR: Not within a transaction to abort.");
+    		return;
+		}
     	nestedTransaction.remove(currentNestedTransactionIndex);
     	currentNestedTransactionIndex--;
 		currentTransaction = new HashMap<>();
@@ -96,7 +100,12 @@ public class Main implements MyREPL {
 
 	private static void deleteFromStorage(String input) {
 		String key = input.split(SPLIT_STRING)[1];
-		nestedTransaction.get(currentNestedTransactionIndex).remove(key);
+		Map<String, String> keyValue = nestedTransaction.get(currentNestedTransactionIndex);
+		if (keyValue != null) {
+			keyValue.remove(key);
+		} else {
+			System.out.println("ERROR: Unable to delete, key does not exist.");
+		}
 	}
 
 	private static void exitApplication() {
