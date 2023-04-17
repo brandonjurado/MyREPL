@@ -25,7 +25,7 @@ Key not found: a
 once-more
 > ABORT
 > READ a
-hello
+hello-again
 > QUIT
 Exiting...
 ```
