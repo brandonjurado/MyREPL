@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static StorageManager storageManager;
+    private static MyREPL repl;
 
     public static void main(String[] args) {
-        storageManager = new StorageManager();
+        repl = new StorageManager();
 
 	    Scanner reader = new Scanner(System.in);
 	    System.out.println("Application started...");
@@ -21,12 +21,12 @@ public class Main {
 			userInput = reader.nextLine();
 			userCommand = Commands.ifContains(userInput);
 			switch(userCommand) {
-				case READ -> storageManager.readStorage(userInput);
-				case WRITE -> storageManager.storeKeyValue(userInput);
-				case DELETE -> storageManager.deleteFromStorage(userInput);
-				case START -> storageManager.startTransaction();
-				case COMMIT -> storageManager.commitTransaction();
-				case ABORT -> storageManager.abortTransaction();
+				case READ -> repl.readStorage(userInput);
+				case WRITE -> repl.storeKeyValue(userInput);
+				case DELETE -> repl.deleteFromStorage(userInput);
+				case START -> repl.startTransaction();
+				case COMMIT -> repl.commitTransaction();
+				case ABORT -> repl.abortTransaction();
 				case QUIT -> exitApplication();
 				case UNKNOWN ->
 						System.out.println("ERROR: Not a valid command. Options: { 'READ {key}' | 'WRITE {key} {value}'" +
