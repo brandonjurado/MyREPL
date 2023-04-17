@@ -27,7 +27,7 @@ public enum Commands {
         }
     }
 
-    public static Commands ifContains(String line) {
+    public static Commands fromString(String line) {
         String[] command = line.split("\\s+");
         return reverseLookup.getOrDefault(command[0].toUpperCase(), UNKNOWN);
     }
